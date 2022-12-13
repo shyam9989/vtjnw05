@@ -2,6 +2,7 @@ package com.project.vtnw05.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,27 +12,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.vtnw05.DTO.APIResponse;
 import com.project.vtnw05.DTO.UserDTO;
+import com.project.vtnw05.interfaces.UserService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@Slf4j
 @RequestMapping("/users")
 public class UserController {
 
-    @PostMapping("/user")
-    public ResponseEntity<APIResponse> userRegister(@RequestBody @Valid UserDTO userDTO){
-        System.out.println("in post matoing");       
-         UserDTO ud=new UserDTO();
-        ud.setEmailId(userDTO.getEmailId());
-        ud.setGender(userDTO.getGender());
-        ud.setMobileNumber(userDTO.getMobileNumber());
-        
-        APIResponse<UserDTO> responseDto= APIResponse
-           .<UserDTO>builder()
-           .status("success")
-           .results(ud)
-           .build();
+    @Autowired UserService userService;
 
-         return new ResponseEntity<>(responseDto,HttpStatus.CREATED); 
+    @PostMapping("/user")
+    public ResponseEntity<APIResponse> userRegister(
+        @RequestBody @Valid UserDTO userDTO
+    ) {
+
+       UserDTO ud= userService.register(userDTO);
+        APIResponse<UserDTO> responseDto = APIResponse
+            .<UserDTO> builder()
+            .status("success")
+            .results(ud)
+            .build();
+        log.info(
+            "UserController::userRegister response {}",
+            ValueMapper.jsonAsString(responseDto)
+        );
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
 
     }
-    
+
 }

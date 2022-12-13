@@ -8,7 +8,7 @@
 		<version>2.7.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<groupId>com.project</groupId>
 	<artifactId>vtjnw05</artifactId>
 	<version>1</version>
