@@ -20,8 +20,9 @@ public class UserController {
     public ResponseEntity<APIResponse> userRegister(@RequestBody @Valid UserDTO userDTO){
         System.out.println("in post matoing");       
          UserDTO ud=new UserDTO();
-        ud.setEmailId("user@gmail.com");
-        ud.setGender("male");
+        ud.setEmailId(userDTO.getEmailId());
+        ud.setGender(userDTO.getGender());
+        ud.setMobileNumber(userDTO.getMobileNumber());
         
         APIResponse<UserDTO> responseDto= APIResponse
            .<UserDTO>builder()
