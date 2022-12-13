@@ -26,12 +26,12 @@ public class UserServiceImpl implements UserService {
         User user = ValueMapper.userDTOtoUserDao(userDTO);
         user = userRepository.save(user);
         log.info(
-            "userservice :: register response from db{}",
+            "userservice :: register after insertion into DB{}",
             ValueMapper.jsonAsString(user)
         );
         UserDTO userdt = ValueMapper.userDaoToUserDTO(user);
         log.info(
-            "userservice :: register response after conversion to dto{}",
+            "userservice :: register response after conversion to DTO{}",
             ValueMapper.jsonAsString(userdt)
         );
         return userdt;
