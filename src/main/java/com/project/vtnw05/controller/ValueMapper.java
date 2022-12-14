@@ -11,7 +11,7 @@ public class ValueMapper {
         User user = new User();
         user.setUserName(userDTO.getUserName());
         user.setEmailId(userDTO.getEmailId());
-        user.setGender(userDTO.getEmailId());
+        user.setGender(userDTO.getGender());
         user.setMobileNumber(userDTO.getMobileNumber());
         user.setUserPassword(userDTO.getUserPassword());
         return user;
