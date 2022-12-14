@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.vtnw05.DTO.APIResponse;
 import com.project.vtnw05.DTO.UserDTO;
+import com.project.vtnw05.exception.UserException;
 import com.project.vtnw05.interfaces.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,5 +42,20 @@ public class UserController {
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
 
     }
+
+    @PostMapping("/userlogin")
+   public ResponseEntity<APIResponse> userLogin(String emailid,String password) throws UserException{
+
+    UserDTO userDTO= userService.login(emailid, password);
+
+    APIResponse<UserDTO> responseDto=APIResponse.<UserDTO> builder()
+    .status("success")
+    .results(userDTO)
+    .build();
+
+    return new ResponseEntity<>(responseDto,HttpStatus.ACCEPTED);
+
+
+   } 
 
 }
